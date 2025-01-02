@@ -185,7 +185,7 @@ W2mod = tf(1, Tp0);
 [Am,Bm,Cm,Dm] = linmod('P1_GeneralizedPlant_RS_NP');
 M = ltisys(Am,Bm,Cm,Dm);
 
-%I insert the zeros I have removed
+% insert the zeros I have removed
 M = sderiv(M,2,[1/wT 1]);
 M = sderiv(M,2,[1/wT 1]);
 [gopt, Gcmod] = hinflmi(M, [1 1], 0, 0.01, [0 0 0]);
@@ -453,6 +453,14 @@ legend('upper bound','lower bound','Interpreter','latex');
 grid on
 
 %Stability check - Structured
+K=[7;18];           Kn=(K(1)+K(2))/2; 
+p1=[0.45;1.15];     p1n=(p1(1)+p1(2))/2;
+p2=[1.5;3.5];       p2n=(p2(1)+p2(2))/2; 
+
+Wk = (Ku(2)-Kn)/Kn;
+Wp1 = (p1u(2)-p1n)/p1n;
+Wp2 = (p2u(2)-p2n)/p2n;
+
 [An,Bn,Cn,Dn] = linmod('N11');
 Ns = minreal(zpk(ss(An,Bn,Cn,Dn)));
 [An,Bn,Cn,Dn]=ssdata(Ns); 

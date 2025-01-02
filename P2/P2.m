@@ -477,6 +477,13 @@ legend('upper bound','lower bound','Interpreter','latex');
 grid on
 
 %Stability check - Structured
+K_u = [16; 64]; zeta_u = [0.52; 0.88]; wn_u = [1.36; 2.84];
+K_n = (K_u(1)+K_u(2))/2; zeta_n = (zeta_u(1)+zeta_u(2))/2; wn_n = (wn_u(1)+wn_u(2))/2;
+
+Wk = (K_u(2)-K_n)/K_n;
+Wwn = (wn_u(2)-wn_n)/wn_n;
+Wzeta = (zeta_u(2)-zeta_n)/zeta_n;
+
 [An,Bn,Cn,Dn] = linmod('N11');
 Ns = minreal(zpk(ss(An,Bn,Cn,Dn)));
 [An,Bn,Cn,Dn]=ssdata(Ns); 
